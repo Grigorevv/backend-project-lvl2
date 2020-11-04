@@ -1,4 +1,4 @@
 # backend-project-lvl2
-[![Maintainability](https://api.codeclimate.com/v1/badges/2bcd1bb212c5e0d9395f/maintainability)](https://codeclimate.com/github/Grigorevv/backend-project-lvl2/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/2bcd1bb212c5e0d9395f/test_coverage)](https://codeclimate.com/github/Grigorevv/backend-project-lvl2/test_coverage)
 ![Linter](https://github.com/Grigorevv/backend-project-lvl2/workflows/Linter/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/774ca70f140ba49cff93/maintainability)](https://codeclimate.com/github/Grigorevv/backend-project-level2/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/774ca70f140ba49cff93/test_coverage)](https://codeclimate.com/github/Grigorevv/backend-project-level2/test_coverage)
