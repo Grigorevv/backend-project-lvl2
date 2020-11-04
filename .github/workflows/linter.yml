@@ -1,18 +1,20 @@
-name: hexlet-check
-
+name: Linter
+# Trigger the workflow on push or pull request
 on:
-  push:
-    branches:
-      - main
+  - push
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Hexlet project check
-        uses: hexlet/project-action@release
+      - name: Use Node.js ${{ matrix.node-version }}
+        # Configures the node version used on GitHub-hosted runners
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@v1
+        # The Node.js version to configure
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: npm install, build
         # Install and build project
         run: |
@@ -33,3 +35,6 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.secretkey }}
         with:
           coverageCommand: make test-coverage
+          debug: true
+
+
