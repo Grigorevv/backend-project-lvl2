@@ -28,7 +28,7 @@ test('gendiff_nested.json', () => {
 });
 
 test('gendiff_nested.yml', () => {
-  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_plain.txt`, 'utf-8');
+  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_nested.txt`, 'utf-8');
   const diff = genDiff('./__fixtures__/nestedf1.yml', './__fixtures__/nestedf2.yml');
   expect(diff).toEqual(dataExpectedFile);
 });
