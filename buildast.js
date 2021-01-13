@@ -35,9 +35,10 @@ const buildAst = (obj1, obj2) => {
     }
     // строка и объект
     if (typeof obj1[key] === 'object' && obj1[key] !== null) {
-      return [{ key, value: getMap(obj1[key], key, 'unchanged'), type: 'deleted' }, getMap(obj2[key], key, 'changed')];
+      return [{ key, value: getMap(obj1[key], key, 'unchanged'), type: 'before' }, getMap(obj2[key], key, 'after')];
     }
-    return [getMap(obj1[key], key, 'deleted'), { key, value: getMap(obj2[key], key, 'unchanged'), type: 'changed' }];
+    // новая строчка - тесты не проходят
+    return [getMap(obj1[key], key, 'before'), getMap(obj2[key], key, 'after')];
   });
   return res.flat();
 };

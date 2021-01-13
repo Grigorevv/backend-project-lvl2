@@ -1,14 +1,15 @@
 const prefix = {
   added: '+',
   deleted: '-',
-  changed: '+',
   unchanged: '',
   children: '',
+  before: '-',
+  after: '+',
 };
 
 const stylish = (ast, replacer = ' ', spacesCount = 4) => {
   const iter = (currentValue, depth, status) => {
-    if (typeof currentValue !== 'object') {
+    if (typeof currentValue !== 'object' || currentValue === null) {
       return `${currentValue}`;
     }
     const { key: key1, value: value1 } = currentValue;
@@ -20,7 +21,7 @@ const stylish = (ast, replacer = ' ', spacesCount = 4) => {
     const currentIndent = replacer.repeat(indentSize - 1);
     const bracketIndent = replacer.repeat(indentSize - spacesCount);
 
-    if (status === 'changed' || status === 'children') {
+    if (status === 'children') {
       currentValue.sort((a, b) => {
         if (a.key > b.key) {
           return 1;
