@@ -4,6 +4,7 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import parser from './parsers.js';
 import stylish from './formatters/stylish.js';
+import plane from './formatters/plane.js';
 import buildAst from './buildast.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,11 +16,11 @@ const getFileData = (filepath) => fs.readFileSync(getPathToFile(filepath), 'utf-
 
 const getFileExtension = (filepath) => path.extname(filepath);
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, formatName) => {
   const obj1 = parser(getFileData(filepath1), getFileExtension(filepath1));
   const obj2 = parser(getFileData(filepath2), getFileExtension(filepath2));
   const ast = buildAst(obj1, obj2);
-  const diff = stylish(ast);
+  const diff = (formatName === 'stylish') ? stylish(ast) : plane(ast);
   return diff;
 };
 

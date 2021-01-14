@@ -13,9 +13,9 @@ const readingCommandLine = () => {
     .description('Compares two configuration files and shows a difference.')
     .option('-f, --format [type]', 'output format')
     .arguments('<filepath1> <filepath2>');
-
+  const formatName = '';
   const pathToFile = program.parse(process.argv);
-  const diff = genDiff(pathToFile.args[0], pathToFile.args[1]);
+  const diff = genDiff(pathToFile.args[0], pathToFile.args[1], formatName);
   return diff;
 };
 

@@ -12,11 +12,6 @@ const stylish = (ast, replacer = ' ', spacesCount = 4) => {
     if (typeof currentValue !== 'object' || currentValue === null) {
       return `${currentValue}`;
     }
-    const { key: key1, value: value1 } = currentValue;
-    if (key1 !== undefined) {
-      return `${value1}`;
-    }
-
     const indentSize = depth * spacesCount;
     const currentIndent = replacer.repeat(indentSize - 1);
     const bracketIndent = replacer.repeat(indentSize - spacesCount);
