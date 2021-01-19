@@ -8,32 +8,26 @@ import genDiff from '../gendiff.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-test('gendiff_plain.json', () => {
+test('gendiff_stylish.json', () => {
+  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_stylish.txt`, 'utf-8');
+  const diff = genDiff('./__fixtures__/f1.json', './__fixtures__/f2.json', 'stylish');
+  expect(diff).toEqual(dataExpectedFile);
+});
+
+test('gendiff_stylish.yml', () => {
+  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_stylish.txt`, 'utf-8');
+  const diff = genDiff('./__fixtures__/f1.yml', './__fixtures__/f2.yml', 'stylish');
+  expect(diff).toEqual(dataExpectedFile);
+});
+
+test('gendiff_plain', () => {
   const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_plain.txt`, 'utf-8');
-  const diff = genDiff('./__fixtures__/plainf1.json', './__fixtures__/plainf2.json', 'stylish');
+  const diff = genDiff('./__fixtures__/f1.json', './__fixtures__/f2.json', 'plain');
   expect(diff).toEqual(dataExpectedFile);
 });
 
-test('gendiff_plain.yml', () => {
-  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_plain.txt`, 'utf-8');
-  const diff = genDiff('./__fixtures__/plainf1.yml', './__fixtures__/plainf2.yml', 'stylish');
-  expect(diff).toEqual(dataExpectedFile);
-});
-
-test('gendiff_nested.json', () => {
-  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_nested.txt`, 'utf-8');
-  const diff = genDiff('./__fixtures__/nestedf1.json', './__fixtures__/nestedf2.json', 'stylish');
-  expect(diff).toEqual(dataExpectedFile);
-});
-
-test('gendiff_nested.yml', () => {
-  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_nested.txt`, 'utf-8');
-  const diff = genDiff('./__fixtures__/nestedf1.yml', './__fixtures__/nestedf2.yml', 'stylish');
-  expect(diff).toEqual(dataExpectedFile);
-});
-
-test('gendiff_nested_formatter_plane', () => {
-  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp.txt`, 'utf-8');
-  const diff = genDiff('./__fixtures__/nestedf1.json', './__fixtures__/nestedf2.json', 'plane');
+test('gendiff_json', () => {
+  const dataExpectedFile = fs.readFileSync(`${__dirname}/../__fixtures__/exp_json.txt`, 'utf-8');
+  const diff = genDiff('./__fixtures__/f1.json', './__fixtures__/f2.yml', 'json');
   expect(diff).toEqual(dataExpectedFile);
 });

@@ -1,7 +1,3 @@
-// gendiff --format plain ./__fixtures__/plainf1.json ./__fixtures__/plainf2.json
-// gendiff --format stylish ./__fixtures__/plainf1.json ./__fixtures__/plainf2.json
-// gendiff -f json ./__fixtures__/nestedf1.json ./__fixtures__/nestedf2.json
-// gendiff ./__fixtures__/nestedf1.yml ./__fixtures__/nestedf2.yml
 import commander from 'commander';
 import genDiff from './gendiff.js';
 
