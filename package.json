@@ -1,7 +1,7 @@
 {
-  "name": "backend-project-lvl2",
+  "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "",
+  "description": "![Linter](https://github.com/Grigorevv/backend-project-lvl2/workflows/Linter/badge.svg) [![Maintainability](https://api.codeclimate.com/v1/badges/774ca70f140ba49cff93/maintainability)](https://codeclimate.com/github/Grigorevv/backend-project-level2/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/774ca70f140ba49cff93/test_coverage)](https://codeclimate.com/github/Grigorevv/backend-project-level2/test_coverage)",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/Grigorevv/backend-project-lvl2.git"
   },
-  "author": "",
+  "author": "Grigorev",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Grigorevv/backend-project-lvl2/issues"
