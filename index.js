@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import parser from './parsers.js';
-import buildAst from './buildast.js';
-import getDiff from './getdiff.js';
+import parser from './src/parsers.js';
+import buildAst from './src/buildast.js';
+import getDiff from './src/getdiff.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
