@@ -29,7 +29,10 @@ const stylish = (ast, replacer = ' ', spacesCount = 4) => {
     }
     const lines = currentValue.map((item) => {
       const { key, value, type } = item;
-      return `${currentIndent.substring(0, currentIndent.length - prefix[type].length)}${prefix[type]} ${key}: ${iter(value, depth + 1, type)}`;
+      let a;
+      if (prefix[type] === undefined || prefix[type] === '') a = 0;
+      else a = 1;
+      return `${currentIndent.substring(0, currentIndent.length - a)}${prefix[type]} ${key}: ${iter(value, depth + 1, type)}`;
     });
     return ['{', ...lines, `${bracketIndent}}`].join('\n');
   };

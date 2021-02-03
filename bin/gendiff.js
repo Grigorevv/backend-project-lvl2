@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// gendiff ./__fixtures__/f1.json ./__fixtures__/f2.json
+// gendiff ../__fixtures__/f1.json ../__fixtures__/f2.json
 import commander from 'commander';
 import genDiff from '../index.js';
 
