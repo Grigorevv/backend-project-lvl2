@@ -14,3 +14,5 @@ program
     console.log(genDiff(file1, file2, program.format));
   });
 program.parse();
+
+export default genDiff;
