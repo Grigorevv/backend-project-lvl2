@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 // gendiff ../__fixtures__/f1.json ../__fixtures__/f2.json
+// gendiff plain ../__fixtures__/f1.json ../__fixtures__/f2.json
+// gendiff json ../__fixtures__/f1.json ../__fixtures__/f2.json
 import commander from 'commander';
 import genDiff from '../index.js';
 
@@ -11,6 +13,7 @@ program
   .option('-f, --format [type]', 'output format', 'stylish')
   .arguments('<filepath1> <filepath2>')
   .action((file1, file2) => {
+    console.log(program.opts())
     console.log(genDiff(file1, file2, program.format));
   });
 program.parse();

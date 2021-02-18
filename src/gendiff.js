@@ -8,7 +8,11 @@ import choiceFormater from './choiceFormater.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getPathToFile = (filename) => path.resolve(__dirname, filename);
+const getPathToFile = (filename) => {
+const a = path.resolve(__dirname, filename);
+//console.log('!!!!!!!!!!!!!!', a)
+  return a;
+};
 
 const getFileData = (filepath) => fs.readFileSync(getPathToFile(filepath), 'utf-8');
 
