@@ -3,7 +3,7 @@ const complexValue = '[complex value]';
 const getStringValue = (value) => ((typeof value !== 'string' || value === complexValue) ? value : `'${value}'`);
 
 const plane = (ast) => {
-  const iter = (currentValue, anchestry = '', currKey, currType, valueBefore = '') => {
+  const iter = (currentValue, anchestry = '', currKey = '', currType = 'children', valueBefore = '') => {
     if (currType === 'children') {
       anchestry += `${currKey}.`;
       currentValue.sort((a, b) => {
@@ -17,16 +17,17 @@ const plane = (ast) => {
       });
     }
     if (currType === 'added') {
-      currentValue = (typeof currentValue === 'object') ? complexValue : currentValue;
-      return `Property '${anchestry}${currKey}' was added with value: ${getStringValue(currentValue)}`;
+      currentValue = (typeof currentValue === 'object' && currentValue !== null) ? complexValue : currentValue;
+      return `Property '${anchestry.substring(1, anchestry.length)}${currKey}' was added with value: ${getStringValue(currentValue)}`;
     }
 
     if (currType === 'deleted') {
-      return `Property '${anchestry}${currKey}' was removed`;
+      return `Property '${anchestry.substring(1, anchestry.length)}${currKey}' was removed`;
     }
 
     if (currType === 'after') {
-      return `Property '${anchestry}${currKey}' was updated. From ${getStringValue(valueBefore)} to ${getStringValue(currentValue)}`;
+      currentValue = (typeof currentValue === 'object' && currentValue !== null) ? complexValue : currentValue;
+      return `Property '${anchestry.substring(1, anchestry.length)}${currKey}' was updated. From ${getStringValue(valueBefore)} to ${getStringValue(currentValue)}`;
     }
 
     const result = currentValue.map((item) => {
@@ -34,7 +35,7 @@ const plane = (ast) => {
       if (type === 'unchanged') return '';
 
       if (type === 'before') {
-        valueBefore = (typeof value === 'object') ? complexValue : value;
+        valueBefore = (typeof value === 'object' && value !== null) ? complexValue : value;
         return '';
       }
       return `${iter(value, anchestry, key, type, valueBefore)}`;

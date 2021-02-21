@@ -29,6 +29,11 @@ const buildAst = (obj1, obj2) => {
     if (_.has(obj1, key) && _.has(obj2, key) && obj1[key] === obj2[key]) {
       return getMap(obj1[key], key, 'unchanged');
     }
+
+    // ключи в обоих объектах, значения не объекты и не равны
+    if (_.has(obj1, key) && _.has(obj2, key) && (typeof obj1[key] !== 'object' || obj1[key] === null) && (typeof obj2[key] !== 'object' || obj2[key] === null)) {
+      return [getMap(obj1[key], key, 'before'), getMap(obj2[key], key, 'after')];
+    }
     // оба значения объекты
     if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
       return { key, value: buildAst(obj1[key], obj2[key]), type: 'children' };
@@ -37,8 +42,8 @@ const buildAst = (obj1, obj2) => {
     if (typeof obj1[key] === 'object' && obj1[key] !== null) {
       return [{ key, value: getMap(obj1[key], key, 'unchanged'), type: 'before' }, getMap(obj2[key], key, 'after')];
     }
-    // новая строчка - тесты не проходят
-    return [getMap(obj1[key], key, 'before'), getMap(obj2[key], key, 'after')];
+    // объект и строка
+    return [getMap(obj1[key], key, 'before'), { key, value: getMap(obj2[key], key, 'unchanged'), type: 'after' }];
   });
   return res.flat();
 };
