@@ -1,48 +1,37 @@
-/* eslint-disable no-param-reassign */
-const complexValue = '[complex value]';
-const getStringValue = (value) => ((typeof value !== 'string' || value === complexValue) ? value : `'${value}'`);
-
-const plane = (ast) => {
-  const iter = (currentValue, anchestry = '', currKey = '', currType = 'children', valueBefore = '') => {
-    if (currType === 'children') {
-      anchestry += `${currKey}.`;
-      currentValue.sort((a, b) => {
-        if (a.key > b.key) {
-          return 1;
-        }
-        if (a.key < b.key) {
-          return -1;
-        }
-        return 0;
-      });
-    }
-    if (currType === 'added') {
-      currentValue = (typeof currentValue === 'object' && currentValue !== null) ? complexValue : currentValue;
-      return `Property '${anchestry.substring(1, anchestry.length)}${currKey}' was added with value: ${getStringValue(currentValue)}`;
-    }
-
-    if (currType === 'deleted') {
-      return `Property '${anchestry.substring(1, anchestry.length)}${currKey}' was removed`;
-    }
-
-    if (currType === 'after') {
-      currentValue = (typeof currentValue === 'object' && currentValue !== null) ? complexValue : currentValue;
-      return `Property '${anchestry.substring(1, anchestry.length)}${currKey}' was updated. From ${getStringValue(valueBefore)} to ${getStringValue(currentValue)}`;
-    }
+const getValue = (value) => {
+  if (typeof value === 'object' && value !== null) return '[complex value]';
+  if (typeof value === 'string') return `'${value}'`;
+  return value;
+};
+export default (ast) => {
+  const iter = (currentValue, curType, curKey, anchestry = '') => {
+    if (curType === 'nested') anchestry += `${curKey}.`;
 
     const result = currentValue.map((item) => {
-      const { key, value, type } = item;
-      if (type === 'unchanged') return '';
+      const {
+        key, type, value, value2,
+      } = item;
 
-      if (type === 'before') {
-        valueBefore = (typeof value === 'object' && value !== null) ? complexValue : value;
-        return '';
+      switch (type) {
+        case 'unchanged':
+          return '';
+
+        case 'added':
+          return `Property '${anchestry}${key}' was added with value: ${getValue(value)}`;
+
+        case 'deleted':
+          return `Property '${anchestry}${key}' was removed`;
+
+        case 'changed':
+          return `Property '${anchestry}${key}' was updated. From ${getValue(value)} to ${getValue(value2)}`;
+
+        default:
+          break;
       }
-      return `${iter(value, anchestry, key, type, valueBefore)}`;
+      const { children } = item;
+      return `${iter(children, type, key, anchestry)}`;
     });
     return result.filter((item) => item !== '').join('\n');
   };
   return iter(ast);
 };
-
-export default plane;

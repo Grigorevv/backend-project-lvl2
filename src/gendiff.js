@@ -15,9 +15,9 @@ const getFileData = (filepath) => fs.readFileSync(getPathToFile(filepath), 'utf-
 const getFileExtension = (filepath) => path.extname(filepath);
 
 const genDiff = (filepath1, filepath2, formatName) => {
-  const obj1 = parser(getFileData(filepath1), getFileExtension(filepath1));
-  const obj2 = parser(getFileData(filepath2), getFileExtension(filepath2));
-  const ast = buildAst(obj1, obj2);
+  const data1 = parser(getFileData(filepath1), getFileExtension(filepath1));
+  const data2 = parser(getFileData(filepath2), getFileExtension(filepath2));
+  const ast = buildAst(data1, data2);
   return choiceFormater(ast, formatName);
 };
 
