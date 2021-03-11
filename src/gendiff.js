@@ -14,11 +14,9 @@ const getFileData = (filepath) => fs.readFileSync(getPathToFile(filepath), 'utf-
 
 const getFileExtension = (filepath) => path.extname(filepath);
 
-const genDiff = (filepath1, filepath2, formatName) => {
+export default (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = parser(getFileData(filepath1), getFileExtension(filepath1));
   const data2 = parser(getFileData(filepath2), getFileExtension(filepath2));
   const ast = buildAst(data1, data2);
   return choiceFormater(ast, formatName);
 };
-
-export default genDiff;
