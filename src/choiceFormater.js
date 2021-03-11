@@ -3,22 +3,18 @@ import plain from './formatters/plain.js';
 import json from './formatters/json.js';
 
 export default (ast, formatName) => {
-  let diff;
   switch (formatName) {
     case 'stylish':
-      diff = stylish(ast);
-      break;
+      return stylish(ast);
 
     case 'plain':
-      diff = plain(ast);
-      break;
+      return plain(ast);
 
     case 'json':
-      diff = json(ast);
-      break;
+      return json(ast);
 
     default:
       break;
   }
-  return diff;
+  return true;
 };

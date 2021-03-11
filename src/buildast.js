@@ -4,8 +4,7 @@ const isObject = (value) => (typeof value === 'object');
 
 const buildAst = (data1, data2) => {
   const keys = Object.keys({ ...data1, ...data2 });
-
-  const ast = keys.sort().map((key) => {
+  const ast = _.sortBy(keys).map((key) => {
     // ключа нет в 1ом объекте
     if (!_.has(data1, key)) {
       return { key, type: 'added', value: data2[key] };
