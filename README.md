@@ -13,10 +13,11 @@
 $ make install
 ```
 
-## Run games
+## Run
 
 ```sh
 $ gendiff [options] <filepath1> <filepath2>
+```
 
 
 [![asciicast](https://asciinema.org/a/KMvv4UOMGv8JnlAAiGYdvCjXk.svg)](https://asciinema.org/a/KMvv4UOMGv8JnlAAiGYdvCjXk)
