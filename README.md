@@ -5,3 +5,6 @@
 [![Actions Status](https://github.com/Grigorevv/backend-project-level2/workflows/hexlet-check/badge.svg)](https://github.com/Grigorevv/backend-project-level2/actions)
 
 [![asciicast](https://asciinema.org/a/KMvv4UOMGv8JnlAAiGYdvCjXk.svg)](https://asciinema.org/a/KMvv4UOMGv8JnlAAiGYdvCjXk)
+
+
+Cli application defining the difference between the two data structures.
