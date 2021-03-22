@@ -14,7 +14,6 @@ export default (ast, formatName) => {
       return json(ast);
 
     default:
-      break;
+      throw new Error(`Unknown state: '${formatName}'!`);
   }
-  return true;
 };

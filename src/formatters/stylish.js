@@ -33,9 +33,8 @@ export default (ast, replacer = ' ', spacesCount = 4) => {
           return `${currentIndent}  ${key}: ${iter(children, depth + 1, value)}`;
 
         default:
-          break;
+          return `${currentIndent}  ${key}: ${iter(children, depth + 1)}`;
       }
-      return `${currentIndent}  ${key}: ${iter(children, depth + 1)}`;
     });
     return ['{', ...lines, `${bracketIndent}}`].join('\n');
   };

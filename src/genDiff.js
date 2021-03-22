@@ -2,7 +2,7 @@ import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import parser from './parsers.js';
-import buildAst from './buildast.js';
+import buildAst from './buildAst.js';
 import choiceFormater from './choiceFormater.js';
 
 const __filename = fileURLToPath(import.meta.url);
