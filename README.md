@@ -7,6 +7,17 @@
 
 # Cli application defining the difference between the two data structures.
 
+## Setup
+
+```sh
+$ make install
+```
+
+## Run games
+
+```sh
+$ gendiff [options] <filepath1> <filepath2>
+
 
 [![asciicast](https://asciinema.org/a/KMvv4UOMGv8JnlAAiGYdvCjXk.svg)](https://asciinema.org/a/KMvv4UOMGv8JnlAAiGYdvCjXk)
 
