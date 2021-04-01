@@ -3,8 +3,8 @@ import _ from 'lodash';
 const isObject = (value) => (typeof value === 'object');
 
 const buildAst = (data1, data2) => {
-  const keys = Object.keys({ ...data1, ...data2 });
-  const ast = _.sortBy(keys).map((key) => {
+  const keys = _.union(_.keys(data1), _.keys(data2));
+  const diff = _.sortBy(keys).map((key) => {
     // ключа нет в 1ом объекте
     if (!_.has(data1, key)) {
       return { key, type: 'added', value: data2[key] };
@@ -13,8 +13,8 @@ const buildAst = (data1, data2) => {
     if (!_.has(data2, key)) {
       return { key, type: 'deleted', value: data1[key] };
     }
-    // ключи в обоих объектах, значения равны
-    if (_.has(data1, key) && _.has(data2, key) && data1[key] === data2[key]) {
+    // значения равны
+    if (data1[key] === data2[key]) {
       return { key, type: 'unchanged', value: data1[key] };
     }
     // оба значения объекты
@@ -26,7 +26,7 @@ const buildAst = (data1, data2) => {
     };
   });
 
-  return ast;
+  return diff;
 };
 
 export default buildAst;

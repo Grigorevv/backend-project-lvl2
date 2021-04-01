@@ -25,8 +25,11 @@ export default (ast) => {
         case 'changed':
           return `Property '${[...anchestry, key].join('.')}' was updated. From ${toStr(value)} to ${toStr(value2)}`;
 
-        default:
+        case 'nested':
           return `${iter(children, [...anchestry, key])}`;
+
+        default:
+          throw new Error(`Unknown type: '${type}'!`);
       }
     });
     return result.filter((item) => item !== '').join('\n');
