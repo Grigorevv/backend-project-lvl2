@@ -1,21 +1,27 @@
 const replacer = ' ';
 const spacesCount = 4;
 
-const iter = (currentValue, depth, curValue) => {
-  if ((typeof curValue !== 'object' || curValue === null) && curValue !== undefined) {
-    return curValue;
-  }
-
+const getIndent = (depth) => {
   const indentSize = depth * spacesCount;
   const currentIndent = replacer.repeat(indentSize - 2);
   const bracketIndent = replacer.repeat(indentSize - spacesCount);
+  return { currentIndent, bracketIndent };
+};
 
-  if (typeof curValue === 'object') { // если значение объект, но не children
-    const lines2 = Object
-      .entries(curValue)
-      .map(([key, val]) => `${currentIndent}  ${key}: ${iter(1, depth + 1, val)}`);
-    return ['{', ...lines2, `${bracketIndent}}`].join('\n');
+const toStr = (depth, value) => {
+  const { currentIndent, bracketIndent } = getIndent(depth);
+
+  if (typeof value === 'object' && value !== null) {
+    const lines = Object
+      .entries(value)
+      .map(([key, val]) => `${currentIndent}  ${key}: ${toStr(depth + 1, val)}`);
+    return ['{', ...lines, `${bracketIndent}}`].join('\n');
   }
+  return value;
+};
+
+const iter = (currentValue, depth) => {
+  const { currentIndent, bracketIndent } = getIndent(depth);
   const lines = currentValue.map((item) => {
     const {
       key, type, value, value2,
@@ -23,16 +29,16 @@ const iter = (currentValue, depth, curValue) => {
     const { children } = item;
     switch (type) {
       case 'changed':
-        return `${currentIndent}- ${key}: ${iter(children, depth + 1, value)}\n${currentIndent}+ ${key}: ${iter(children, depth + 1, value2)}`;
+        return `${currentIndent}- ${key}: ${toStr(depth + 1, value)}\n${currentIndent}+ ${key}: ${toStr(depth + 1, value2)}`;
 
       case 'added':
-        return `${currentIndent}+ ${key}: ${iter(children, depth + 1, value)}`;
+        return `${currentIndent}+ ${key}: ${toStr(depth + 1, value)}`;
 
       case 'deleted':
-        return `${currentIndent}- ${key}: ${iter(children, depth + 1, value)}`;
+        return `${currentIndent}- ${key}: ${toStr(depth + 1, value)}`;
 
       case 'unchanged':
-        return `${currentIndent}  ${key}: ${iter(children, depth + 1, value)}`;
+        return `${currentIndent}  ${key}: ${toStr(depth + 1, value)}`;
 
       case 'nested':
         return `${currentIndent}  ${key}: ${iter(children, depth + 1)}`;
